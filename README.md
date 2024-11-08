@@ -17,7 +17,6 @@ A simple and responsive Todo application built using React.js. This application 
 - **Add New Todo**: Users can add new tasks to their list.
 - **Edit Existing Todo**: Modify existing tasks.
 - **Delete Todo**: Remove tasks from the list.
-- **Mark Todo as Complete**: Mark tasks as complete or incomplete.
 - **Responsive Design**: Fully responsive design for mobile, tablet, and desktop.
 
 
