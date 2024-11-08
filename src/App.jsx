@@ -49,20 +49,20 @@ function App() {
         <div className='w-full items-center gap-4 flex flex-col mt-4'>
           <form onSubmit={submithandler} className='flex gap-3 flex-wrap justify-center' action="">
             <input value={task} onChange={(e) => { setTask(e.target.value) }} className='w-80 px-3 py-1 bg-stone-800 rounded-lg' type="text" name="" placeholder='Enter your agenda...' id="" />
-            <button className='bg-green-300 rounded-lg p-2 text-black'>{curr ? "UPDATE" : "CREATE"}</button>
+            <button className='bg-indigo-400 rounded-lg p-2 font-semibold text-black'>{curr ? "UPDATE" : "CREATE"}</button>
           </form>
 
-          <div className='w-[50%] list overflow-y-scroll h-[80vh]'>
+          <div className='md:w-[50%] w-full list overflow-y-scroll h-[80vh]'>
             {
               list.length != 0 ?
                 list.map((e, idx) => {
                   return (
                     <>
-                      <div className='flex justify-between m-2 flex-wrap'>
+                      <div className='flex justify-between m-2 flex-wrap border-b-[1px] border-stone-950 p-1'>
                         <p className='capitalize text-xl'>{e}</p>
                         <div className='flex gap-3'>
-                          <button className='p-2 rounded-lg bg-blue-500 hover:scale-110 hover:bg-blue-800' onClick={() => { editHandler(idx) }}>EDIT</button>
-                          <button className='p-2 rounded-lg bg-red-600 hover:scale-110 hover:bg-red-800' onClick={() => { deleteHandler(idx) }}>DELETE</button>
+                          <button className='p-2 rounded-md bg-blue-500 hover:scale-110 hover:bg-blue-800 font-semibold' onClick={() => { editHandler(idx) }}>Edit</button>
+                          <button className='p-2 rounded-md bg-red-600 hover:scale-110 hover:bg-red-800 font-semibold' onClick={() => { deleteHandler(idx) }}>Remove</button>
                         </div>
                       </div>
                     </>
