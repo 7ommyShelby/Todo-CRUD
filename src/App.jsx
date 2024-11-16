@@ -7,6 +7,8 @@ function App() {
   const [task, setTask] = useState("");
   const [curr, setCurr] = useState(null);
 
+
+
   const submithandler = (e) => {
     e.preventDefault();
 
@@ -16,10 +18,12 @@ function App() {
         const updateIdx = list.indexOf(curr);
         list[updateIdx] = task;
         setCurr("");
+        localStorage.setItem('task' , JSON.stringify([...prev]))
         return [...prev];
       })
         :
         setList((prev) => {
+          localStorage.setItem('task' , JSON.stringify([...prev , task]))
           return [...prev, task];
         })
       : null
