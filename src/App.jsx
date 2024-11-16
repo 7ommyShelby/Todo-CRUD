@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { MdDeleteOutline } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import './App.css'
+import Card from './Card';
 
 function App() {
 
   const [list, setList] = useState(JSON.parse(localStorage.getItem("task")) || []);
+
   const [task, setTask] = useState("");
+
   const [curr, setCurr] = useState(null);
 
   const data = localStorage.getItem("task");
   console.log(data);
-
 
   const submithandler = (e) => {
     e.preventDefault();
@@ -17,38 +21,56 @@ function App() {
     task != "" ?
 
       curr ? setList((prev) => {
-        const updateIdx = list.indexOf(curr);
-        list[updateIdx] = task;
+
+        const updatedList = prev.map((item) =>
+          item === curr ? { ...item, text: task } : item
+        );
+
         setCurr("");
-        localStorage.setItem('task', JSON.stringify([...prev]))
-        return [...prev];
+        // localStorage.setItem('task', JSON.stringify([...prev]))
+        return updatedList;
       })
         :
         setList((prev) => {
-          localStorage.setItem('task', JSON.stringify([...prev, task]))
-          return [...prev, task];
+          const newTask = { text: task, color: colorChnage() };
+          // localStorage.setItem('task', JSON.stringify([...prev, newTask]))
+          return [...prev, newTask];
         })
       : null
 
     setTask("");
+
   }
+  // console.log("Curr", curr);
 
   const deleteHandler = (index) => {
-    // setList(list.filter((e, idx) => idx != index));
-    setList(() => {
-      // prev.filter((e ,idx)=>idx!=idx);
-      localStorage.setItem('task', JSON.stringify(list.filter((e, idx) => idx != index)))
-      return list.filter((e, idx) => idx != index)
+    setList((prev) => {
+      const updatedList = prev.filter((e, idx) => idx !== index);
+      // localStorage.setItem('task', updatedList)
+      return updatedList;
     })
   }
 
   const editHandler = (index) => {
     setCurr(list[index]);
-    setTask(list[index]);
+    setTask(list[index].text);
   }
 
-  console.log(list);
-  console.log(task);
+  // console.log(list);
+  // console.log("Task", task);
+
+  const col = ['#af7ac5', '#73c6b6', '#fad7a0', '#d0ece7', '#2ecc71', '#95a5a6']
+
+  const colorChnage = () => {
+    const val = Math.floor(Math.random() * col.length);
+    return col[val];
+  }
+
+  useEffect(() => {
+    colorChnage()
+    localStorage.setItem('task', JSON.stringify(list))
+  }, [list])
+
 
   return (
     <>
@@ -63,19 +85,20 @@ function App() {
             <button className='bg-indigo-400 rounded-lg p-2 font-semibold text-black'>{curr ? "UPDATE" : "CREATE"}</button>
           </form>
 
-          <div className='md:w-[50%] w-full list overflow-y-scroll h-[80vh]'>
+          <div className='flex w-full list flex-wrap gap-2'>
             {
               list.length != 0 ?
                 list.map((e, idx) => {
                   return (
                     <>
-                      <div className='flex justify-between m-2 flex-wrap border-b-[1px] border-stone-950 p-1'>
-                        <p className='capitalize text-xl'>{e}</p>
-                        <div className='flex gap-3'>
-                          <button className='p-2 rounded-md bg-blue-500 hover:scale-110 hover:bg-blue-800 font-semibold' onClick={() => { editHandler(idx) }}>Edit</button>
-                          <button className='p-2 rounded-md bg-red-600 hover:scale-110 hover:bg-red-800 font-semibold' onClick={() => { deleteHandler(idx) }}>Remove</button>
-                        </div>
-                      </div>
+
+                      <Card
+                        color={e.color}
+                        text={e.text}
+                        edit={() => { editHandler(idx) }}
+                        deleteHandler={() => { deleteHandler(idx) }}
+                      />
+
                     </>
                   )
                 }) : <>
