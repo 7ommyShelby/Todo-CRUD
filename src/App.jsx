@@ -3,10 +3,12 @@ import './App.css'
 
 function App() {
 
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(JSON.parse(localStorage.getItem("task")) || []);
   const [task, setTask] = useState("");
   const [curr, setCurr] = useState(null);
 
+const data = localStorage.getItem("task");
+console.log(data);
 
 
   const submithandler = (e) => {
