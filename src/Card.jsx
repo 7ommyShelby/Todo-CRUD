@@ -5,7 +5,7 @@ import { CiEdit } from "react-icons/ci";
 const Card = ({ color, text, edit, deleteHandler }) => {
     return (
         <>
-            <div style={{ backgroundColor: color }} className={`notes border flex w-56 flex-col text-slate-800 rounded-lg p-2 `}>
+            <div style={{ backgroundColor: color }} className={`notes flex min-w-56 w-fit flex-col text-slate-800 rounded-lg p-2 `}>
 
                 <div className='flex gap-3 justify-end'>
                     <button className='p-2 rounded-md bg-blue-500 hover:scale-110 hover:bg-blue-800 font-semibold' onClick={edit}><CiEdit /></button>
