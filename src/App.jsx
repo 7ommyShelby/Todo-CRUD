@@ -7,8 +7,8 @@ function App() {
   const [task, setTask] = useState("");
   const [curr, setCurr] = useState(null);
 
-const data = localStorage.getItem("task");
-console.log(data);
+  const data = localStorage.getItem("task");
+  console.log(data);
 
 
   const submithandler = (e) => {
@@ -20,12 +20,12 @@ console.log(data);
         const updateIdx = list.indexOf(curr);
         list[updateIdx] = task;
         setCurr("");
-        localStorage.setItem('task' , JSON.stringify([...prev]))
+        localStorage.setItem('task', JSON.stringify([...prev]))
         return [...prev];
       })
         :
         setList((prev) => {
-          localStorage.setItem('task' , JSON.stringify([...prev , task]))
+          localStorage.setItem('task', JSON.stringify([...prev, task]))
           return [...prev, task];
         })
       : null
@@ -34,7 +34,12 @@ console.log(data);
   }
 
   const deleteHandler = (index) => {
-    setList(list.filter((e, idx) => idx != index));
+    // setList(list.filter((e, idx) => idx != index));
+    setList(() => {
+      // prev.filter((e ,idx)=>idx!=idx);
+      localStorage.setItem('task', JSON.stringify(list.filter((e, idx) => idx != index)))
+      return list.filter((e, idx) => idx != index)
+    })
   }
 
   const editHandler = (index) => {
