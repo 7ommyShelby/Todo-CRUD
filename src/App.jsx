@@ -91,14 +91,12 @@ function App() {
                 list.map((e, idx) => {
                   return (
                     <>
-
                       <Card
                         color={e.color}
                         text={e.text}
                         edit={() => { editHandler(idx) }}
                         deleteHandler={() => { deleteHandler(idx) }}
                       />
-
                     </>
                   )
                 }) : <>
