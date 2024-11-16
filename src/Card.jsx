@@ -15,16 +15,20 @@ const Card = ({ color, text, edit, deleteHandler }) => {
                 <p>{text}</p>
 
             </div> */}
-            <div style={{ backgroundColor: color }} className={`notes flex min-w-56 w-fit flex-col text-slate-800 rounded-lg p-2 relative`}>
+
+            <div style={{ backgroundColor: color }} className={`notes flex min-w-56 flex-col text-slate-800 rounded-lg p-2 relative`}>
 
                 <button className='absolute top-1 left-2 p-2 rounded-md bg-blue-500 hover:text-xl smooth ease-in delay-1500 transition-all hover:bg-blue-800 font-semibold' onClick={edit}>
                     <CiEdit />
                 </button>
+
                 <button className='absolute top-1 right-2 p-2 rounded-md bg-red-600 hover:text-xl smooth ease-in delay-1500 transition-all hover:bg-red-800 font-semibold' onClick={deleteHandler}>
                     <MdDeleteOutline />
                 </button>
-
-                <p className='mt-10 font-medium italic'>{text}</p>
+                
+                <div className='mt-6'>
+                    <p className='font-medium italic'>{text}</p>
+                </div>
 
             </div>
         </>

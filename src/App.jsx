@@ -80,8 +80,8 @@ function App() {
         </nav>
 
         <div className='w-full items-center gap-4 flex flex-col mt-4'>
-          <form onSubmit={submithandler} className='flex gap-3 flex-wrap justify-center' action="">
-            <input value={task} onChange={(e) => { setTask(e.target.value) }} className='w-80 px-3 py-1 bg-stone-800 rounded-lg' type="text" name="" placeholder='Enter your agenda...' id="" />
+          <form onSubmit={submithandler} className='flex gap-3 w-full flex-wrap justify-center' action="">
+            <input value={task} onChange={(e) => { setTask(e.target.value) }} className='focus:outline-none focus:ring-2 focus:ring-blue-500 w-80 min-w-[50%] px-3 py-1 bg-stone-800 rounded-lg' type="text" name="" placeholder='Enter your agenda...' id="" />
             <button className='bg-indigo-400 rounded-lg p-2 font-semibold text-black'>{curr ? "UPDATE" : "CREATE"}</button>
           </form>
 
